@@ -6,6 +6,11 @@ TagManager:
   tags:
   - Coin
   - GoldEnemy
+  - DeathlyEnemy
+  - Enemy
+  - LightGun
+  - LightProjectile
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -20,7 +25,7 @@ TagManager:
   - box
   - background
   - enemy
-  - 
+  - lightProjectile
   - 
   - 
   - 

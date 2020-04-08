@@ -9,9 +9,12 @@ public class DeathlyEnemy : Triangle
     private float timeWait = 0.8f;
     private float timeChangePos = 0.5f;
 
+    private Box[] boxs;
+
     // Start is called before the first frame update
     void Start()
     {
+        boxs = FindObjectsOfType<Box>();
         seek_force = Random.Range(0.1f, 0.5f);
         player = FindObjectOfType<Player>().gameObject;
         randomTarget();
@@ -21,13 +24,39 @@ public class DeathlyEnemy : Triangle
     // Update is called once per frame
     void Update()
     {
+        chasing();
+        movement();
+    }
+
+    private void movement()
+    {
+        Vector2 steering = Vector2.zero;
+
+        steering = steering + seek(target);
+        steering = steering + avoidance(boxs);
+
+        steering = Vector2.ClampMagnitude(steering, seek_force);
+
+        velocity = Vector2.ClampMagnitude(velocity + steering, speed);
+
+        lookAt(velocity);
+        body.velocity = velocity;
+    }
+
+
+    private void chasing()
+    {
+        if(player == null)
+        {
+            return;
+        }
         if (timeFollow > 0)
         {
             timeFollow -= Time.deltaTime;
             timeChangePos -= Time.deltaTime;
-            if(timeChangePos < 0)
+            if (timeChangePos < 0)
             {
-                timeChangePos = Random.Range(0.1f,0.5f);
+                timeChangePos = Random.Range(0.1f, 0.5f);
                 target = player.transform.position;
             }
             if (timeFollow <= 0 || Vector2.Distance(transform.position, target) < 1f)
@@ -38,17 +67,15 @@ public class DeathlyEnemy : Triangle
             }
         }
 
-        if(timeFollow <= 0)
+        if (timeFollow <= 0)
         {
-           
+
             timeWait -= Time.deltaTime;
-            if(timeWait < 0)
+            if (timeWait < 0)
             {
-                timeWait = Random.Range(0.6f,2.0f);
+                timeWait = Random.Range(0.6f, 2.0f);
                 timeFollow = 5.0f;
             }
         }
-
-        base.Update();
     }
 }

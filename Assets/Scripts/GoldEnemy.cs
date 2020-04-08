@@ -43,7 +43,7 @@ public class GoldEnemy : Triangle
         {
             randomTarget();
         }
-        base.Update();
+        movement();
     }
 
     void randomFlashtime()

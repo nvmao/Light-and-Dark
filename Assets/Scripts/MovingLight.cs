@@ -27,11 +27,7 @@ public class MovingLight : Triangle
             speed = 0;
         }
 
-        velocity = body.velocity;
-        seek(target);
-        lookAt(velocity);
-
-        body.velocity = velocity;
+        movement();
     }
 
     IEnumerator disableCollider(CircleCollider2D collider)

@@ -8,20 +8,25 @@ public class ChasingEnemy : Triangle
     
     private SpriteRenderer renderer;
 
+    Player player;
+
     // Start is called before the first frame update
     void Start()
     {
         renderer = GetComponent<SpriteRenderer>();
         base.Start();
         randomTarget();
+        player = FindObjectOfType<Player>();
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        Vector2 playerPosition = FindObjectOfType<Player>().transform.position;
-
+        Vector2 playerPosition = Vector2.zero;
+        if (player != null)
+        {
+            playerPosition = player.transform.position;
+        }
 
         if (Vector2.Distance(transform.position, playerPosition) <= radius && playerPosition != null)
         {
@@ -41,7 +46,7 @@ public class ChasingEnemy : Triangle
         }
 
 
+        movement();
 
-        base.Update();
     }
 }

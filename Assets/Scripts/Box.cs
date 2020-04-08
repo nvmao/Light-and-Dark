@@ -22,5 +22,6 @@ public class Box : MonoBehaviour
         {
             collision.GetComponent<Player>().playDeathEffect();
         }
+        
     }
 }

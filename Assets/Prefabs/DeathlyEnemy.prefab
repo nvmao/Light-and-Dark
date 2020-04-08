@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 6934769949695543874}
   m_Layer: 12
   m_Name: DeathlyEnemy
-  m_TagString: Untagged
+  m_TagString: DeathlyEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -98,7 +98,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 7
-  seek_force: 0.4
+  seek_force: 0.1
 --- !u!50 &6934769949695543880
 Rigidbody2D:
   serializedVersion: 4

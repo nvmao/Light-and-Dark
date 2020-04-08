@@ -19,7 +19,7 @@ public class WonderEnemy : Triangle
         {
             randomTarget();
         }
-        base.Update();
+        movement();
     }
 
    

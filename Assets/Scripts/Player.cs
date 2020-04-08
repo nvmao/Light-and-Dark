@@ -14,10 +14,18 @@ public class Player : Triangle
     [SerializeField] bool canSpeedUp = true;
     [SerializeField] bool startSpeedUp = false;
 
+    private Box[] boxs;
+    private void Awake()
+    {
+        QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 60;
+    }
+
     // Start is called before the first frame update
     void Start()
     {
         speedUpTime = speedCanUpTo;
+        boxs = FindObjectsOfType<Box>();
 
         base.Start();
     }
@@ -42,8 +50,24 @@ public class Player : Triangle
 
         target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
-        base.Update();
+        movement();
     }
+
+    private void movement()
+    {
+        Vector2 steering = Vector2.zero;
+
+        steering = steering + seek(target);
+
+        steering = Vector2.ClampMagnitude(steering, seek_force);
+
+        velocity = Vector2.ClampMagnitude(velocity + steering, speed);
+
+        lookAt(velocity);
+        body.velocity = velocity;
+    }
+
+
 
     private void speedUp()
     {
@@ -74,8 +98,8 @@ public class Player : Triangle
 
     private void resetSpeed()
     {
-        speed = 5;
-        seek_force = 0.1f;
+        speed = 6;
+        seek_force = 0.8f;
     }
 
     IEnumerator speedUpCoroutine()
@@ -106,7 +130,7 @@ public class Player : Triangle
             return;
         }
 
-        if (collision.CompareTag("Coin"))
+        if (collision.CompareTag("Coin") || collision.CompareTag("LightGun") || collision.CompareTag("Door"))
         {
             return;
         }
