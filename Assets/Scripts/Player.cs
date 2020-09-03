@@ -14,6 +14,10 @@ public class Player : Triangle
     [SerializeField] bool canSpeedUp = true;
     [SerializeField] bool startSpeedUp = false;
 
+    [SerializeField] Joystick joystick;
+    [SerializeField] Transform arrow;
+    [SerializeField] Transform center;   
+
     private Box[] boxs;
     private void Awake()
     {
@@ -34,21 +38,34 @@ public class Player : Triangle
     void Update()
     {
 
-
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        //}
-
-        //if (Vector2.Distance(transform.position, target) <= 0.3f)
-        //{
-        //    target = velocity.normalized * 20;
-
-        //}
-
         speedUp();
 
-        target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        //target = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        float inputX = joystick.Horizontal;
+        float inputY = joystick.Vertical;
+
+        //float maxS = 0.4f;
+        //inputX = Mathf.Clamp(inputX, -maxS, maxS);
+        //inputY = Mathf.Clamp(inputY, -maxS, maxS);
+
+        //if (Vector2.Distance(transform.position, arrow.position) < 2f)
+        //{
+        //    float arrowSpeed = speed * Time.deltaTime * 0.8f;
+        //    arrow.position = arrow.position + new Vector3(inputX, inputY, 0) * arrowSpeed;
+
+        //}
+        if(joystick.Direction.x != 0 && joystick.Direction.y != 0)
+        {
+            float joyAngle = Mathf.Atan2(inputY, inputX);
+            // Convert in degrees
+            joyAngle = joyAngle * Mathf.Rad2Deg;
+
+            center.transform.eulerAngles = new Vector3(center.transform.eulerAngles.x, center.transform.eulerAngles.y, joyAngle);
+
+            target = arrow.position;
+        }
+ 
 
         movement();
     }
