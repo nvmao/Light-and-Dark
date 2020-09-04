@@ -47,7 +47,7 @@ public class FlockEnemy : Triangle
         steering = steering + this.separation();
         //steering = steering + avoidance(boxs);
 
-        steering = Vector2.ClampMagnitude(steering, seek_force);
+        steering = Vector2.ClampMagnitude(steering, seekForce);
 
         velocity = Vector2.ClampMagnitude(velocity + steering, speed);
 

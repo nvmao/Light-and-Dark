@@ -8,9 +8,12 @@ public class Triangle : MonoBehaviour
     protected Transform transform;
 
     [SerializeField] protected float speed = 10f;
-    [SerializeField] protected float seek_force = 0.5f;
+    [SerializeField] protected float seekForce = 0.5f;
     protected Vector2 target;
     protected Vector2 velocity = new Vector2(1,1);
+
+    public float Speed { get => speed; set => speed = value; }
+    public float SeekForce { get => seekForce; set => seekForce = value; }
 
 
     // Start is called before the first frame update
@@ -33,7 +36,7 @@ public class Triangle : MonoBehaviour
 
         steering = steering + seek(target);
 
-        steering = Vector2.ClampMagnitude(steering, seek_force);
+        steering = Vector2.ClampMagnitude(steering, seekForce);
 
         velocity = Vector2.ClampMagnitude(velocity + steering, speed);
 

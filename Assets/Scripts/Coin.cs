@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
-public class Coin : MonoBehaviour
+public class Coin : MonoBehaviour,mao.IOnTouch
 {
 
     private CircleCollider2D collider2D;
@@ -43,12 +43,8 @@ public class Coin : MonoBehaviour
         light2D.pointLightOuterRadius = radius;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void onTouch(Player player)
     {
-        if(collision.gameObject.CompareTag("Player"))
-        {
-            Destroy(gameObject);
-        }
+        Destroy(gameObject);
     }
-
 }

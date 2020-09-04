@@ -76,7 +76,7 @@ public class Player : Triangle
 
         steering = steering + seek(target);
 
-        steering = Vector2.ClampMagnitude(steering, seek_force);
+        steering = Vector2.ClampMagnitude(steering, seekForce);
 
         velocity = Vector2.ClampMagnitude(velocity + steering, speed);
 
@@ -86,7 +86,7 @@ public class Player : Triangle
 
 
 
-    private void speedUp()
+    public void speedUp()
     {
         if (Input.GetMouseButtonDown(1) )
         {
@@ -113,10 +113,10 @@ public class Player : Triangle
 
     }
 
-    private void resetSpeed()
+    public void resetSpeed()
     {
-        speed = 6;
-        seek_force = 0.8f;
+        speed = 8;
+        seekForce = 0.92f;
     }
 
     IEnumerator speedUpCoroutine()
@@ -125,7 +125,7 @@ public class Player : Triangle
         while (true)
         {
             speed = 15000;
-            seek_force = 1.0f;
+            seekForce = 1.0f;
             yield return null;
         }
     }
@@ -142,15 +142,10 @@ public class Player : Triangle
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("GoldEnemy") && collision.GetComponent<GoldEnemy>().isYellow())
+         mao.IOnTouch touchObject = collision.GetComponent<mao.IOnTouch>();
+        if (touchObject != null)
         {
-            return;
+            touchObject.onTouch(this);
         }
-
-        if (collision.CompareTag("Coin") || collision.CompareTag("LightGun") || collision.CompareTag("Door"))
-        {
-            return;
-        }
-        playDeathEffect();
     }
 }

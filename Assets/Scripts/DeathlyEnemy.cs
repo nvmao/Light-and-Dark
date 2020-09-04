@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeathlyEnemy : Triangle
+public class DeathlyEnemy : Triangle,mao.IOnTouch
 {
     private GameObject player;
     private float timeFollow = 5.0f;
@@ -15,7 +15,7 @@ public class DeathlyEnemy : Triangle
     void Start()
     {
         boxs = FindObjectsOfType<Box>();
-        seek_force = Random.Range(0.1f, 0.5f);
+        seekForce = Random.Range(0.1f, 0.5f);
         player = FindObjectOfType<Player>().gameObject;
         randomTarget();
         base.Start();
@@ -35,7 +35,7 @@ public class DeathlyEnemy : Triangle
         steering = steering + seek(target);
         steering = steering + avoidance(boxs);
 
-        steering = Vector2.ClampMagnitude(steering, seek_force);
+        steering = Vector2.ClampMagnitude(steering, seekForce);
 
         velocity = Vector2.ClampMagnitude(velocity + steering, speed);
 
@@ -77,5 +77,10 @@ public class DeathlyEnemy : Triangle
                 timeFollow = 5.0f;
             }
         }
+    }
+
+    public void onTouch(Player player)
+    {
+        player.playDeathEffect();
     }
 }

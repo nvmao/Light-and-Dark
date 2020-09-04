@@ -8,6 +8,10 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject money;
     [SerializeField] GameObject enemy;
 
+    [SerializeField] GameObject[] objects;
+
+    [SerializeField] Player player;
+
     GameObject currentMoney;
 
     [SerializeField]
@@ -37,11 +41,22 @@ public class EnemySpawner : MonoBehaviour
 
     void spawn()
     {
-        Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
-        Vector2 randPosition2 = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
+        Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY)) + (Vector2)player.transform.position * 5f;
+        Vector2 randPosition2 = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY)) + (Vector2)player.transform.position * 5f;
+
         Instantiate(enemy, randPosition2, Quaternion.identity);
         GameObject newMoney = Instantiate(money, randPosition, Quaternion.identity);
         currentMoney = newMoney;
 
+        spawnObjects();
+    }
+
+    void spawnObjects()
+    {
+        foreach(GameObject obj in this.objects)
+        {
+            Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY)) + (Vector2)player.transform.position;
+            Instantiate(obj, randPosition, Quaternion.identity);
+        }
     }
 }
