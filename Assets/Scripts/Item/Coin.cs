@@ -49,6 +49,8 @@ public class Coin : MonoBehaviour,mao.IOnTouch
     public void onTouch(Player player)
     {
         Instantiate(deathParticle, transform.position, Quaternion.identity);
+        AudioManager.instance.play("coinDeath");
+        
         Destroy(gameObject);
     }
 }

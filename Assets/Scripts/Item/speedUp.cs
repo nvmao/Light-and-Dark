@@ -25,9 +25,11 @@ public class speedUp : MonoBehaviour,IOnTouch
             lifeTime -= Time.deltaTime;
             if (lifeTime < 0)
             {
+                AudioManager.instance.stop("speedUpBG");
+
+
                 cameraController.SetBool("isZoomOut", false);
                 this.player.resetSpeed();
-
 
                 player.ItemsList.Remove(gameObject);
                 Destroy(gameObject);
@@ -60,6 +62,9 @@ public class speedUp : MonoBehaviour,IOnTouch
         transform.localPosition = new Vector2(2f, -2f);
 
         Destroy(GetComponent<CircleCollider2D>());
+
+        AudioManager.instance.play("eatSpeedUp");
+        AudioManager.instance.play("speedUpBG");
     }
 
 }

@@ -11,8 +11,8 @@ public class BtnManager : MonoBehaviour
 
     void Start()
     {
-        restartBtn.GetComponent<Button>().onClick.AddListener(MySceneManager.reloadScene);
-        ExitBtn.GetComponent<Button>().onClick.AddListener(delegate { MySceneManager.loadScene("map"); });
+        //restartBtn.GetComponent<Button>().onClick.AddListener(MySceneManager.reloadScene);
+        //ExitBtn.GetComponent<Button>().onClick.AddListener(delegate { MySceneManager.loadScene("map"); });
     }
 
     // Update is called once per frame

@@ -35,10 +35,13 @@ public class Player : Triangle
         speedUpTime = speedCanUpTo;
         base.Start();
     }
-
     // Update is called once per frame
     void Update()
     {
+        if (!GameController.instance.isStart)
+        {
+            return;
+        }
 
         speedUp();
 
@@ -47,9 +50,6 @@ public class Player : Triangle
         float inputX = joystick.Horizontal;
         float inputY = joystick.Vertical;
 
-        //float maxS = 0.4f;
-        //inputX = Mathf.Clamp(inputX, -maxS, maxS);
-        //inputY = Mathf.Clamp(inputY, -maxS, maxS);
 
         //if (Vector2.Distance(transform.position, arrow.position) < 2f)
         //{
@@ -136,7 +136,24 @@ public class Player : Triangle
     {
         Instantiate(deathParticle, transform.position,Quaternion.identity);
         FindObjectOfType<DeathEffect>().explore(transform.position);
-        FindObjectOfType<Menu>().playAnimation();
+        GameController.instance.isStart = false;
+        body.velocity = new Vector2(0, 0);
+        Destroy(GetComponent<SpriteRenderer>());
+        Destroy(GetComponent<PolygonCollider2D>());
+        foreach (Transform child in transform)
+        {
+            GameObject.Destroy(child.gameObject);
+        }
+
+        StartCoroutine(reloadScene());
+        AudioManager.instance.play("gameOver");
+        AudioManager.instance.play("playerDeath");
+    }
+
+    IEnumerator reloadScene()
+    {
+        yield return new WaitForSeconds(2.2f);
+        MySceneManager.reloadScene();
         Destroy(gameObject);
     }
 

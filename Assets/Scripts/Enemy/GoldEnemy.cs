@@ -89,6 +89,8 @@ public class GoldEnemy : Triangle,mao.IOnTouch
             return;
         }
         FindObjectOfType<DeathEffect>().exploreCoin(transform.position);
+        AudioManager.instance.play("goldEnemyDeath");
+
         Destroy(gameObject);
     }
 }

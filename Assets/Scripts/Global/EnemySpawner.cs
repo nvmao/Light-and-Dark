@@ -19,7 +19,6 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     float minRandY = 0, maxRandY = 0;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -59,8 +58,6 @@ public class EnemySpawner : MonoBehaviour
         currentMoney = newMoney;
 
         spawnObjects();
-
-        Debug.Log(new Vector2(player.transform.position.x + minRandX, player.transform.position.x + maxRandX));
     }
 
     void spawnObjects()
@@ -70,7 +67,6 @@ public class EnemySpawner : MonoBehaviour
             bool isKill = obj.CompareTag("Kill");
             if (isKill)
             {
-                Debug.Log("kill");
                 //instanceObject(obj);
                 if (Random.Range(1, 3) == 2)
                 {

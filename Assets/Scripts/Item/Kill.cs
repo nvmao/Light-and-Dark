@@ -38,6 +38,7 @@ public class Kill : MonoBehaviour,mao.IOnTouch
                 Instantiate(deathParticle, transform.position, Quaternion.identity);
                 player.ItemsList.Remove(gameObject);
 
+                AudioManager.instance.play("playerDeath");
                 Destroy(gameObject);
                 Destroy(target.gameObject);
             }
@@ -75,5 +76,7 @@ public class Kill : MonoBehaviour,mao.IOnTouch
         transform.localPosition = new Vector2(-2f, -2f);
 
         Destroy(collider);
+
+        AudioManager.instance.play("eatKill");
     }
 }
