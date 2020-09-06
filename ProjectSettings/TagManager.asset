@@ -11,6 +11,9 @@ TagManager:
   - LightGun
   - LightProjectile
   - Door
+  - CameraController
+  - SpeedUp
+  - Kill
   layers:
   - Default
   - TransparentFX
@@ -27,8 +30,8 @@ TagManager:
   - enemy
   - lightProjectile
   - Item
-  - 
-  - 
+  - ItemTrigger
+  - KillItem
   - 
   - 
   - 

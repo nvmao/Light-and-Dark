@@ -39,24 +39,55 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    public Vector2 getCurrentMoneyPos()
+    {
+        if(currentMoney != null)
+            return currentMoney.transform.position;
+
+        return Vector2.zero;
+    }
+
     void spawn()
     {
-        Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY)) + (Vector2)player.transform.position * 5f;
-        Vector2 randPosition2 = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY)) + (Vector2)player.transform.position * 5f;
+        Vector2 randPosition = new Vector2(Random.Range(minRandX,maxRandX),
+            Random.Range(minRandY,maxRandY));
+        Vector2 randPosition2 = new Vector2(Random.Range(minRandX, maxRandX),
+            Random.Range(minRandY, maxRandY));
 
-        Instantiate(enemy, randPosition2, Quaternion.identity);
-        GameObject newMoney = Instantiate(money, randPosition, Quaternion.identity);
+        Instantiate(enemy, randPosition * 3f + (Vector2)player.transform.position, Quaternion.identity);
+        GameObject newMoney = Instantiate(money, randPosition2 * 3f + (Vector2)player.transform.position, Quaternion.identity);
         currentMoney = newMoney;
 
         spawnObjects();
+
+        Debug.Log(new Vector2(player.transform.position.x + minRandX, player.transform.position.x + maxRandX));
     }
 
     void spawnObjects()
     {
         foreach(GameObject obj in this.objects)
         {
-            Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY)) + (Vector2)player.transform.position;
-            Instantiate(obj, randPosition, Quaternion.identity);
+            bool isKill = obj.CompareTag("Kill");
+            if (isKill)
+            {
+                Debug.Log("kill");
+                //instanceObject(obj);
+                if (Random.Range(1, 3) == 2)
+                {
+                    instanceObject(obj);
+                }
+            }
+            else if(!isKill)
+            {
+                instanceObject(obj);
+            }
+           
         }
+    }
+
+    void instanceObject(GameObject obj) 
+    {
+        Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
+        Instantiate(obj, randPosition + (Vector2)player.transform.position, Quaternion.identity);
     }
 }

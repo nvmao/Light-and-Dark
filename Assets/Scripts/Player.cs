@@ -16,21 +16,23 @@ public class Player : Triangle
 
     [SerializeField] Joystick joystick;
     [SerializeField] Transform arrow;
-    [SerializeField] Transform center;   
+    [SerializeField] Transform center;
 
-    private Box[] boxs;
+
+    List<GameObject> itemsList = new List<GameObject>();
+
+    public List<GameObject> ItemsList { get => itemsList; set => itemsList = value; }
+
     private void Awake()
     {
-        QualitySettings.vSyncCount = 1;
-        Application.targetFrameRate = 60;
+        //QualitySettings.vSyncCount = 1;
+        //Application.targetFrameRate = 60;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         speedUpTime = speedCanUpTo;
-        boxs = FindObjectsOfType<Box>();
-
         base.Start();
     }
 
@@ -115,7 +117,7 @@ public class Player : Triangle
 
     public void resetSpeed()
     {
-        speed = 8;
+        speed = 10;
         seekForce = 0.92f;
     }
 
@@ -135,14 +137,22 @@ public class Player : Triangle
         Instantiate(deathParticle, transform.position,Quaternion.identity);
         FindObjectOfType<DeathEffect>().explore(transform.position);
         FindObjectOfType<Menu>().playAnimation();
-        
-
         Destroy(gameObject);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-         mao.IOnTouch touchObject = collision.GetComponent<mao.IOnTouch>();
+        mao.IOnTouch touchObject = null;
+
+        if(collision.transform.parent != null)
+        {
+           touchObject = collision.transform.parent.GetComponent<mao.IOnTouch>();
+        }
+        else
+        {
+            touchObject = collision.transform.GetComponent<mao.IOnTouch>();
+        }
+
         if (touchObject != null)
         {
             touchObject.onTouch(this);

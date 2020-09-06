@@ -5,7 +5,6 @@ using UnityEngine;
 public class Triangle : MonoBehaviour
 {
     protected Rigidbody2D body;
-    protected Transform transform;
 
     [SerializeField] protected float speed = 10f;
     [SerializeField] protected float seekForce = 0.5f;
@@ -19,7 +18,6 @@ public class Triangle : MonoBehaviour
     // Start is called before the first frame update
     protected void Start()
     {
-        transform = GetComponent<Transform>();
         body = GetComponent<Rigidbody2D>();
         target = Vector2.zero;
     }
@@ -78,11 +76,26 @@ public class Triangle : MonoBehaviour
         body.velocity = velocity;
     }
 
+    protected void randomTargetOnscreen()
+    {
+        float minRandX = -40;
+        float maxRandX = 130 ;
+        float minRandY = -90;
+        float maxRandY = 50;
+
+        target = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
+
+    }
     protected void randomTarget()
     {
-        float x = Random.Range(-16, 16);
-        float y = Random.Range(-9, 9);
-        target = new Vector2(x, y);
+        float minRandX = -20;
+        float maxRandX = 20;
+        float minRandY = -20;
+        float maxRandY = 20;
+
+        target = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
+
+        target = ((Vector2)transform.position) + target * 3f;
     }
 
     protected Vector2 flee(Vector2 target)
