@@ -12,10 +12,14 @@ public class Coin : MonoBehaviour,mao.IOnTouch
 
     [SerializeField] GameObject deathParticle;
 
+    int value;
+
 
     // Start is called before the first frame update
     void Start()
     {
+        value = Random.Range(1, 10);
+
         collider2D = GetComponent<CircleCollider2D>();
         light2D = GetComponentInChildren<Light2D>();
         light2D.pointLightOuterRadius = Random.Range(0.2f,2);
@@ -50,7 +54,10 @@ public class Coin : MonoBehaviour,mao.IOnTouch
     {
         Instantiate(deathParticle, transform.position, Quaternion.identity);
         AudioManager.instance.play("coinDeath");
-        
+
+        GameController.instance.GameStatus.Coin += value;
+        Database.saveGameStatus(GameController.instance.GameStatus);
+
         Destroy(gameObject);
     }
 }

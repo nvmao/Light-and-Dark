@@ -13,7 +13,7 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch
     // Start is called before the first frame update
     void Start()
     {
-        seekForce = Random.Range(0.1f, 0.5f);
+        seekForce = Random.Range(0.8f, 2f);
         player = FindObjectOfType<Player>().gameObject;
         randomTarget();
         base.Start();

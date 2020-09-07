@@ -6,7 +6,6 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class RedEnemy : MonoBehaviour
 {
     private GameObject player;
-    private Transform transform;
     private Transform childTranform;
 
     [SerializeField] private GameObject projectile;
@@ -40,7 +39,6 @@ public class RedEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        transform = GetComponent<Transform>();
         player = FindObjectOfType<Player>().gameObject;
         childTranform = GetComponentsInChildren<Transform>()[1];
         if(childTranform.name != "Triangle")
