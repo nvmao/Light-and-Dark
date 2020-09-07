@@ -64,8 +64,7 @@ public class EnemySpawner : MonoBehaviour
     {
         foreach(GameObject obj in this.objects)
         {
-            bool isKill = obj.CompareTag("Kill");
-            if (isKill)
+            if (obj.CompareTag("Kill"))
             {
                 //instanceObject(obj);
                 if (Random.Range(1, 3) == 2)
@@ -73,7 +72,14 @@ public class EnemySpawner : MonoBehaviour
                     instanceObject(obj);
                 }
             }
-            else if(!isKill)
+            else if (obj.CompareTag("AutoCollect"))
+            {
+                if (Random.Range(1, 5) == 2)
+                {
+                    instanceObject(obj);
+                }
+            }
+            else
             {
                 instanceObject(obj);
             }

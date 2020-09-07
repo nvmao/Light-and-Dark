@@ -2,6 +2,7 @@ ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
     - AudioManager
+    - AutoCollect
     - BtnManager
     - Coin
     - DeathEffect
@@ -80,10 +81,8 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     - UnityEditor.Graphs.AnimatorControllerTool
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
@@ -144,149 +143,151 @@ ScriptsOnlyBuild:
     - Class: 104
       Script: {instanceID: 0}
     - Class: 114
-      Script: {instanceID: 11890}
+      Script: {instanceID: 11914}
     - Class: 114
-      Script: {instanceID: 11892}
+      Script: {instanceID: 11916}
     - Class: 114
-      Script: {instanceID: 11894}
+      Script: {instanceID: 11918}
     - Class: 114
-      Script: {instanceID: 11896}
+      Script: {instanceID: 11920}
     - Class: 114
-      Script: {instanceID: 11898}
+      Script: {instanceID: 11922}
     - Class: 114
-      Script: {instanceID: 11900}
+      Script: {instanceID: 11924}
     - Class: 114
-      Script: {instanceID: 11902}
+      Script: {instanceID: 11926}
     - Class: 114
-      Script: {instanceID: 11904}
+      Script: {instanceID: 11928}
     - Class: 114
-      Script: {instanceID: 11992}
+      Script: {instanceID: 12016}
     - Class: 114
-      Script: {instanceID: 12034}
+      Script: {instanceID: 12058}
     - Class: 114
-      Script: {instanceID: 12126}
+      Script: {instanceID: 12150}
     - Class: 114
-      Script: {instanceID: 12178}
+      Script: {instanceID: 12202}
     - Class: 114
-      Script: {instanceID: 12292}
+      Script: {instanceID: 12316}
     - Class: 114
-      Script: {instanceID: 12326}
+      Script: {instanceID: 12352}
     - Class: 114
-      Script: {instanceID: 12650}
+      Script: {instanceID: 12676}
     - Class: 114
-      Script: {instanceID: 12904}
+      Script: {instanceID: 12930}
     - Class: 114
-      Script: {instanceID: 13340}
+      Script: {instanceID: 13366}
     - Class: 114
-      Script: {instanceID: 13408}
+      Script: {instanceID: 13434}
     - Class: 114
-      Script: {instanceID: 13518}
+      Script: {instanceID: 13506}
     - Class: 114
-      Script: {instanceID: 13696}
+      Script: {instanceID: 13546}
     - Class: 114
-      Script: {instanceID: 13792}
+      Script: {instanceID: 13724}
     - Class: 114
-      Script: {instanceID: 13834}
+      Script: {instanceID: 13820}
     - Class: 114
-      Script: {instanceID: 13866}
+      Script: {instanceID: 13862}
     - Class: 114
-      Script: {instanceID: 14188}
+      Script: {instanceID: 13894}
     - Class: 114
-      Script: {instanceID: 14244}
+      Script: {instanceID: 14216}
     - Class: 114
-      Script: {instanceID: 14338}
+      Script: {instanceID: 14272}
     - Class: 114
-      Script: {instanceID: 14460}
+      Script: {instanceID: 14308}
     - Class: 114
-      Script: {instanceID: 14520}
+      Script: {instanceID: 14368}
     - Class: 114
-      Script: {instanceID: 14712}
+      Script: {instanceID: 14490}
     - Class: 114
-      Script: {instanceID: 14824}
+      Script: {instanceID: 14550}
     - Class: 114
-      Script: {instanceID: 14972}
+      Script: {instanceID: 14742}
     - Class: 114
-      Script: {instanceID: 15008}
+      Script: {instanceID: 14854}
     - Class: 114
-      Script: {instanceID: 15076}
+      Script: {instanceID: 15002}
     - Class: 114
-      Script: {instanceID: 15222}
+      Script: {instanceID: 15038}
     - Class: 114
-      Script: {instanceID: 15332}
+      Script: {instanceID: 15106}
     - Class: 114
-      Script: {instanceID: 15454}
+      Script: {instanceID: 15252}
     - Class: 114
-      Script: {instanceID: 15546}
+      Script: {instanceID: 15362}
     - Class: 114
-      Script: {instanceID: 15550}
+      Script: {instanceID: 15484}
     - Class: 114
-      Script: {instanceID: 15572}
+      Script: {instanceID: 15576}
     - Class: 114
       Script: {instanceID: 15580}
     - Class: 114
-      Script: {instanceID: 15582}
+      Script: {instanceID: 15602}
     - Class: 114
-      Script: {instanceID: 15656}
+      Script: {instanceID: 15610}
     - Class: 114
-      Script: {instanceID: 15698}
+      Script: {instanceID: 15612}
     - Class: 114
-      Script: {instanceID: 15712}
+      Script: {instanceID: 15626}
     - Class: 114
-      Script: {instanceID: 15756}
+      Script: {instanceID: 15686}
     - Class: 114
-      Script: {instanceID: 15812}
+      Script: {instanceID: 15728}
     - Class: 114
-      Script: {instanceID: 15824}
+      Script: {instanceID: 15742}
     - Class: 114
-      Script: {instanceID: 15930}
+      Script: {instanceID: 15786}
     - Class: 114
-      Script: {instanceID: 16010}
+      Script: {instanceID: 15842}
     - Class: 114
-      Script: {instanceID: 16054}
+      Script: {instanceID: 15854}
     - Class: 114
-      Script: {instanceID: 16134}
+      Script: {instanceID: 15960}
     - Class: 114
-      Script: {instanceID: 16288}
+      Script: {instanceID: 16042}
     - Class: 114
-      Script: {instanceID: 16358}
+      Script: {instanceID: 16088}
     - Class: 114
-      Script: {instanceID: 16390}
+      Script: {instanceID: 16168}
     - Class: 114
-      Script: {instanceID: 16456}
+      Script: {instanceID: 16322}
     - Class: 114
-      Script: {instanceID: 16742}
+      Script: {instanceID: 16392}
+    - Class: 114
+      Script: {instanceID: 16426}
+    - Class: 114
+      Script: {instanceID: 16492}
     - Class: 114
       Script: {instanceID: 16778}
     - Class: 114
       Script: {instanceID: 16814}
     - Class: 114
-      Script: {instanceID: 16900}
+      Script: {instanceID: 16850}
     - Class: 114
-      Script: {instanceID: 17000}
+      Script: {instanceID: 16936}
     - Class: 114
-      Script: {instanceID: 17060}
+      Script: {instanceID: 17036}
     - Class: 114
-      Script: {instanceID: 17298}
+      Script: {instanceID: 17096}
     - Class: 114
-      Script: {instanceID: 17328}
+      Script: {instanceID: 17334}
     - Class: 114
-      Script: {instanceID: 17332}
+      Script: {instanceID: 17364}
     - Class: 114
-      Script: {instanceID: 17384}
+      Script: {instanceID: 17368}
     - Class: 114
       Script: {instanceID: 17420}
     - Class: 114
-      Script: {instanceID: 17494}
+      Script: {instanceID: 17456}
     - Class: 114
-      Script: {instanceID: 17590}
+      Script: {instanceID: 17458}
     - Class: 114
-      Script: {instanceID: 17598}
+      Script: {instanceID: 17532}
     - Class: 114
-      Script: {instanceID: 19842}
+      Script: {instanceID: 17628}
     - Class: 114
-      Script: {instanceID: 59664}
-    - Class: 114
-      Script: {instanceID: 67746}
+      Script: {instanceID: 17636}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -776,6 +777,12 @@ ScriptsOnlyBuild:
     className: Mask
   - hash:
       serializedVersion: 2
+      Hash: 0bba421beb917cb43c18fc54ffa47e9e
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AutoCollect
+  - hash:
+      serializedVersion: 2
       Hash: caa533b001ae39b864ba8425019e2268
     assemblyName: UnityEngine.UI.dll
     namespaceName: UnityEngine.UI
@@ -930,6 +937,12 @@ ScriptsOnlyBuild:
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: ChasingEnemy
+  - hash:
+      serializedVersion: 2
+      Hash: 82c4ce2c915cf5ee82e6d62309a6c467
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: MainMenu
   - hash:
       serializedVersion: 2
       Hash: 040dd48e3a027d5424519a5fa2009df4
@@ -1256,6 +1269,12 @@ ScriptsOnlyBuild:
     className: Physics2DRaycaster
   - hash:
       serializedVersion: 2
+      Hash: f8bb247b01e6821991c102e83827f781
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: GameController
+  - hash:
+      serializedVersion: 2
       Hash: 824e8d4cb47ffd88ddf959dbd4526585
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
@@ -1340,7 +1359,7 @@ ScriptsOnlyBuild:
     className: Tonemapping
   - hash:
       serializedVersion: 2
-      Hash: 98ab9fda7ed2b401baa36dab8add56c6
+      Hash: 6aaf704255c14a2e30f9210ad6c3007b
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: DeathlyEnemy
@@ -1700,6 +1719,12 @@ ScriptsOnlyBuild:
     className: CinemachineBasicMultiChannelPerlin
   - hash:
       serializedVersion: 2
+      Hash: defa0125a5034e4b8667f2c551ee7bd7
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: AudioManager
+  - hash:
+      serializedVersion: 2
       Hash: 1f0602e7bad1e0a9cba31ce292eee8bb
     assemblyName: Unity.RenderPipelines.Core.Runtime.dll
     namespaceName: UnityEngine.Rendering.UI
@@ -1764,25 +1789,7 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
-  - hash:
-      serializedVersion: 2
-      Hash: defa0125a5034e4b8667f2c551ee7bd7
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: AudioManager
-  - hash:
-      serializedVersion: 2
-      Hash: 82c4ce2c915cf5ee82e6d62309a6c467
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: MainMenu
-  - hash:
-      serializedVersion: 2
-      Hash: 498b133e5362b2ac34df991e9fbaae65
-    assemblyName: Assembly-CSharp.dll
-    namespaceName: 
-    className: GameController
   platform: 13
   scenePathNames:
   - Assets/Scenes/s1.unity
-  playerPath: C:/Users/MSI/Downloads/LostLight_build_test-v1.2.apk
+  playerPath: C:/Users/MSI/Downloads/LostLight_build_test-v1.3.apk

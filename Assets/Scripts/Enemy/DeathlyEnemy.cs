@@ -9,11 +9,12 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch
     private float timeWait = 0.8f;
     private float timeChangePos = 0.5f;
 
+    [SerializeField] LayerMask layerMask;
 
     // Start is called before the first frame update
     void Start()
     {
-        seekForce = Random.Range(0.8f, 2f);
+        seekForce = Random.Range(0.1f, 1f);
         player = FindObjectOfType<Player>().gameObject;
         randomTarget();
         base.Start();
@@ -31,7 +32,8 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch
         Vector2 steering = Vector2.zero;
 
         steering = steering + seek(target);
-        //steering = steering + avoidance(boxs);
+
+        steering = steering + avoidance(layerMask);
 
         steering = Vector2.ClampMagnitude(steering, seekForce);
 

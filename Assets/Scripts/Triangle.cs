@@ -98,6 +98,22 @@ public class Triangle : MonoBehaviour
         target = ((Vector2)transform.position) + target * 3f;
     }
 
+    protected Vector2 avoidance(LayerMask layerMask)
+    {
+
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, body.velocity, 5, layerMask);
+
+
+        if (hit.collider != null)
+        {
+            Debug.DrawLine(transform.position, hit.point, Color.red);
+
+            Vector2 avoid = hit.point - (Vector2)hit.collider.transform.position;
+            return avoid.normalized * speed * 2;
+        }
+        return Vector2.zero;
+    }
+
     protected Vector2 flee(Vector2 target)
     {
         Vector2 desired = target - (Vector2)transform.position;
