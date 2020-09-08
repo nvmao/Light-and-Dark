@@ -27,6 +27,9 @@ public class GameController : MonoBehaviour
             return;
         }
 
+        QualitySettings.vSyncCount = 1;
+        Application.targetFrameRate = 60;
+
         DontDestroyOnLoad(gameObject);
 
         loadData();

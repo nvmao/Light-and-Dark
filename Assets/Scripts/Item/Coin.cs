@@ -41,7 +41,7 @@ public class Coin : MonoBehaviour,mao.IOnTouch
         else
         {
             radius -= Time.deltaTime;
-            if(radius <= 0.2)
+            if(radius <= 0.5f)
             {
                 lightUp = true;
             }
