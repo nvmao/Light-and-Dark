@@ -18,7 +18,7 @@ public class AutoCollect : MonoBehaviour,mao.IOnTouch
 
     [SerializeField] Light2D light;
 
-    float speed = 10f;
+    float speed = 20f;
 
     // Use this for initialization
     void Start()
@@ -86,8 +86,8 @@ public class AutoCollect : MonoBehaviour,mao.IOnTouch
 
         Destroy(collider);
 
-        light.pointLightInnerRadius = 14;
-        light.pointLightOuterRadius = 17;
+        //light.pointLightInnerRadius = 14;
+        //light.pointLightOuterRadius = 17;
 
         //AudioManager.instance.play("eatKill");
     }

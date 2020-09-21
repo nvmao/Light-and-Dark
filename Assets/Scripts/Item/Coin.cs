@@ -21,33 +21,33 @@ public class Coin : MonoBehaviour,mao.IOnTouch
         value = Random.Range(1, 10);
 
         collider2D = GetComponent<CircleCollider2D>();
-        light2D = GetComponentInChildren<Light2D>();
-        light2D.pointLightOuterRadius = Random.Range(0.2f,2);
+        //light2D = GetComponentInChildren<Light2D>();
+        //light2D.pointLightOuterRadius = Random.Range(0.2f,2);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        float radius = light2D.pointLightOuterRadius;
-        if(lightUp == true)
-        {
-            radius += Time.deltaTime;
-            if(radius >= 2)
-            {
-                lightUp = false;
-            }
-        }
-        else
-        {
-            radius -= Time.deltaTime;
-            if(radius <= 0.5f)
-            {
-                lightUp = true;
-            }
-        }
+        //float radius = light2D.pointLightOuterRadius;
+        //if(lightUp == true)
+        //{
+        //    radius += Time.deltaTime;
+        //    if(radius >= 2)
+        //    {
+        //        lightUp = false;
+        //    }
+        //}
+        //else
+        //{
+        //    radius -= Time.deltaTime;
+        //    if(radius <= 0.5f)
+        //    {
+        //        lightUp = true;
+        //    }
+        //}
 
-        light2D.pointLightOuterRadius = radius;
+        //light2D.pointLightOuterRadius = radius;
     }
 
     public void onTouch(Player player)

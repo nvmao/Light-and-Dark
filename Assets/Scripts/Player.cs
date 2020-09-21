@@ -18,10 +18,12 @@ public class Player : Triangle
     [SerializeField] Transform arrow;
     [SerializeField] Transform center;
 
+    [SerializeField] LayerMask layerMask;
 
     List<GameObject> itemsList = new List<GameObject>();
 
     public List<GameObject> ItemsList { get => itemsList; set => itemsList = value; }
+
 
     private void Awake()
     {
@@ -57,7 +59,7 @@ public class Player : Triangle
         //    arrow.position = arrow.position + new Vector3(inputX, inputY, 0) * arrowSpeed;
 
         //}
-        if(joystick.Direction.x != 0 && joystick.Direction.y != 0)
+        if (joystick.Direction.x != 0 && joystick.Direction.y != 0)
         {
             float joyAngle = Mathf.Atan2(inputY, inputX);
             // Convert in degrees
@@ -67,7 +69,7 @@ public class Player : Triangle
 
             target = arrow.position;
         }
- 
+
 
         movement();
     }
@@ -77,6 +79,7 @@ public class Player : Triangle
         Vector2 steering = Vector2.zero;
 
         steering = steering + seek(target);
+        //steering = steering + avoidance(layerMask);
 
         steering = Vector2.ClampMagnitude(steering, seekForce);
 
@@ -117,8 +120,8 @@ public class Player : Triangle
 
     public void resetSpeed()
     {
-        speed = 10;
-        seekForce = 0.92f;
+        speed = 13;
+        seekForce = 1f;
     }
 
     IEnumerator speedUpCoroutine()
@@ -159,13 +162,15 @@ public class Player : Triangle
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("col: " + collision.name);
         mao.IOnTouch touchObject = null;
 
         if(collision.transform.parent != null)
         {
            touchObject = collision.transform.parent.GetComponent<mao.IOnTouch>();
         }
-        else
+
+        if(touchObject == null)
         {
             touchObject = collision.transform.GetComponent<mao.IOnTouch>();
         }

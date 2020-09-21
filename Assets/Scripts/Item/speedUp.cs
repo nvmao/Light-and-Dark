@@ -54,7 +54,7 @@ public class speedUp : MonoBehaviour,IOnTouch
 
 
         this.player = player;
-        player.Speed = 15f;
+        player.Speed = 16f;
         player.SeekForce = 4f;
 
         playerPick = true;
@@ -64,7 +64,7 @@ public class speedUp : MonoBehaviour,IOnTouch
         Destroy(GetComponent<CircleCollider2D>());
 
         AudioManager.instance.play("eatSpeedUp");
-        AudioManager.instance.play("speedUpBG");
+        //AudioManager.instance.play("speedUpBG");
     }
 
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GoldEnemy : Triangle,mao.IOnTouch
+public class GoldEnemy : Triangle,mao.IOnTouch,mao.ICanDisable
 {
     private SpriteRenderer renderer;
     private float flashTime;
@@ -11,6 +11,14 @@ public class GoldEnemy : Triangle,mao.IOnTouch
     private StateColor stateColor;
 
     Animator animator;
+
+    BlurOnAwaken blurOnAwaken;
+
+    private void Awake()
+    {
+        blurOnAwaken = new BlurOnAwaken(GetComponent<SpriteRenderer>());
+        StartCoroutine(blurOnAwaken.wait());
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -21,10 +29,12 @@ public class GoldEnemy : Triangle,mao.IOnTouch
         stateColor = StateColor.black;
 
         animator.enabled = false;
-        renderer.color = new Color(0, 0, 0);
+        renderer.color = new Color(252, 0, 0);
 
         randomFlashtime();
-        base.Start();   
+        base.Start();
+
+      
     }
 
     // Update is called once per frame
@@ -39,7 +49,7 @@ public class GoldEnemy : Triangle,mao.IOnTouch
 
             speed = 3;
             randomFlashtime();
-            renderer.color = new Color(0, 0, 0);
+            renderer.color = new Color(252, 0, 0);
             stateColor = StateColor.black;
         }
         else if(flashTime < 1f)
@@ -72,7 +82,7 @@ public class GoldEnemy : Triangle,mao.IOnTouch
 
     void randomFlashtime()
     {
-        flashTime = Random.Range(8.0f, 15.0f);
+        flashTime = Random.Range(8.0f, 10.0f);
     }
 
 
@@ -92,5 +102,16 @@ public class GoldEnemy : Triangle,mao.IOnTouch
         AudioManager.instance.play("goldEnemyDeath");
 
         Destroy(gameObject);
+    }
+
+    void mao.ICanDisable.disabled()
+    {
+        this.enabled = false;
+        this.GetComponent<PolygonCollider2D>().enabled = false;
+    }
+    void mao.ICanDisable.enabled()
+    {
+        this.enabled = true;
+        this.GetComponent<PolygonCollider2D>().enabled = true;
     }
 }

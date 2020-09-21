@@ -14,6 +14,7 @@ public class Triangle : MonoBehaviour
     public float Speed { get => speed; set => speed = value; }
     public float SeekForce { get => seekForce; set => seekForce = value; }
 
+    [SerializeField] Transform startPoint;
 
     // Start is called before the first frame update
     protected void Start()
@@ -101,7 +102,7 @@ public class Triangle : MonoBehaviour
     protected Vector2 avoidance(LayerMask layerMask)
     {
 
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, body.velocity, 5, layerMask);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, body.velocity, 12, layerMask);
 
 
         if (hit.collider != null)
@@ -131,53 +132,5 @@ public class Triangle : MonoBehaviour
         float angle = Mathf.Atan2(target.y, target.x) * Mathf.Rad2Deg;
         transform.rotation = Quaternion.Euler(0, 0, angle - 90);
     }
-
-     protected Vector2 avoidance(Box[] boxs)
-    {
-        float dynamic_length = velocity.magnitude / speed;
-
-
-        Vector2 ahead = (Vector2)transform.position + velocity.normalized * dynamic_length;
-        Vector2 ahead2 = (Vector2)transform.position + velocity.normalized * dynamic_length * 0.5f;
-
-
-        Box box = findMostThreateningBox(ahead, ahead2,boxs);
-
-        Vector2 avoidance = Vector2.zero;
-
-        if (box != null)
-        {
-            avoidance = ahead - (Vector2)box.transform.position;
-
-            avoidance = avoidance.normalized * speed * 2;
-
-            //avoidance = Vector2.ClampMagnitude(avoidance, 20f);
-
-        }
-        return avoidance;
-    }
-
-    private Box findMostThreateningBox(Vector2 ahead, Vector2 ahead2,Box[] boxs)
-    {
-        Box mostThreatening = null;
-
-        foreach (var box in boxs)
-        {
-
-            float boxRadius = (box.GetComponent<Transform>().localScale.x / 2) * 1.2f;
-            float d_ahead = Vector2.Distance(box.transform.position, ahead);
-            float d_ahead2 = Vector2.Distance(box.transform.position, ahead2);
-
-            bool collision = (d_ahead <= boxRadius || d_ahead2 <= boxRadius);
-
-            float d_to_box = Vector2.Distance(transform.position, box.transform.position);
-            Debug.Log(collision);
-            if (collision && (mostThreatening == null || d_to_box <
-                Vector2.Distance(transform.position, mostThreatening.transform.position)))
-            {
-                mostThreatening = box;
-            }
-        }
-        return mostThreatening;
-    }
+   
 }

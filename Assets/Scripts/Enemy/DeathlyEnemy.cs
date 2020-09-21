@@ -1,20 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using mao;
 using UnityEngine;
 
-public class DeathlyEnemy : Triangle,mao.IOnTouch
+public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.ICanDisable,mao.IOnStartPool
 {
     private GameObject player;
     private float timeFollow = 5.0f;
     private float timeWait = 0.8f;
     private float timeChangePos = 0.5f;
 
+    [SerializeField]
+    GameObject deathEffect;
+
     [SerializeField] LayerMask layerMask;
+
+    BlurOnAwaken blurOnAwaken;
+
+    private void Awake()
+    {
+        onStart();
+    }
+
+    public void onStart()
+    {
+        blurOnAwaken = new BlurOnAwaken(GetComponent<SpriteRenderer>());
+        StartCoroutine(blurOnAwaken.wait());
+    }
 
     // Start is called before the first frame update
     void Start()
     {
-        seekForce = Random.Range(0.1f, 1f);
+        //speed = Random.Range(8, 18);
+        seekForce = Random.Range(0.1f, 1.8f);
         player = FindObjectOfType<Player>().gameObject;
         randomTarget();
         base.Start();
@@ -83,4 +101,28 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch
     {
         player.playDeathEffect();
     }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.CompareTag("DeathlyEnemy"))
+        {
+            Instantiate(deathEffect, transform.position, Quaternion.identity);
+
+            AudioManager.instance.play("playerDeath");
+            Destroy(gameObject);
+        }
+        
+    }
+
+    void mao.ICanDisable.disabled()
+    {
+        this.enabled = false;
+        this.GetComponent<PolygonCollider2D>().enabled = false;
+    }
+    void mao.ICanDisable.enabled()
+    {
+        this.enabled = true;
+        this.GetComponent<PolygonCollider2D>().enabled = true;
+    }
+
 }

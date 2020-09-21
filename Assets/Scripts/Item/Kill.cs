@@ -31,9 +31,16 @@ public class Kill : MonoBehaviour,mao.IOnTouch
     {
         if (playerPick && foundTarget)
         {
+
+            if(target == null)
+            {
+                player.ItemsList.Remove(gameObject);
+                Destroy(gameObject);
+                return;
+            }
             transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-            if(Vector2.Distance(transform.position,target.position) < 0.4f)
+            if (Vector2.Distance(transform.position,target.position) < 0.4f)
             {
                 Instantiate(deathParticle, transform.position, Quaternion.identity);
                 player.ItemsList.Remove(gameObject);

@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour
     [SerializeField]
     GameStatusUI gameStatusUI;
 
+    float timeCount;
+
     public GameStatus GameStatus { get => gameStatus; set => gameStatus = value; }
 
     private void Awake()
@@ -38,18 +40,20 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        timeCount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
         setCoin();
+        setBestTime();
     }
 
     void loadData()
     {
         gameStatus = Database.loadGameStatus(gameStatus);
+        gameStatusUI.setAll(gameStatus);
     }
    
 
@@ -57,7 +61,30 @@ public class GameController : MonoBehaviour
     {
         gameStatusUI.coin.text = gameStatus.Coin.ToString();
     }
-    
+
+    void setBestTime()
+    {
+        if (!isStart)
+        {
+            timeCount = 0;
+            return;
+        }
+
+        timeCount += Time.deltaTime;
+
+        if(timeCount > gameStatus.BestSurviveTime)
+        {
+            gameStatus.BestSurviveTime = (int)(timeCount);
+            gameStatusUI.bestSurvive.text = gameStatus.BestSurviveTime.ToString();
+            Database.saveGameStatus(gameStatus);
+        }
+    }
+
+
+    void setBest()
+    {
+
+    }
 
 
 }

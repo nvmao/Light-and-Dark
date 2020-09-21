@@ -19,9 +19,13 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField]
     float minRandY = 0, maxRandY = 0;
 
+    float spawnTime = 5f;
+    float spawnTimeCount;
+
     // Start is called before the first frame update
     void Start()
     {
+        spawnTimeCount = spawnTime;
         Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
         GameObject newMoney = Instantiate(money, randPosition, Quaternion.identity);
         currentMoney = newMoney;
@@ -30,9 +34,15 @@ public class EnemySpawner : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentMoney == null)
+        //if(currentMoney == null)
+        //{
+        //    spawn();
+        //}
+        spawnTimeCount -= Time.deltaTime;
+        if(spawnTimeCount < 0)
         {
             spawn();
+            spawnTimeCount = spawnTime;
         }
 
 
@@ -52,8 +62,12 @@ public class EnemySpawner : MonoBehaviour
             Random.Range(minRandY,maxRandY));
         Vector2 randPosition2 = new Vector2(Random.Range(minRandX, maxRandX),
             Random.Range(minRandY, maxRandY));
+        Vector2 randPosition3 = new Vector2(Random.Range(minRandX, maxRandX),
+            Random.Range(minRandY, maxRandY));
 
-        Instantiate(enemy, randPosition * 3f + (Vector2)player.transform.position, Quaternion.identity);
+        ObjectPooler.Instance.spawn("DeathlyEnemy", randPosition * 3f + (Vector2)player.transform.position, Quaternion.identity);
+        ObjectPooler.Instance.spawn("DeathlyEnemy", randPosition3 * 3f + (Vector2)player.transform.position, Quaternion.identity);
+
         GameObject newMoney = Instantiate(money, randPosition2 * 3f + (Vector2)player.transform.position, Quaternion.identity);
         currentMoney = newMoney;
 
@@ -74,7 +88,7 @@ public class EnemySpawner : MonoBehaviour
             }
             else if (obj.CompareTag("AutoCollect"))
             {
-                if (Random.Range(1, 5) == 2)
+                if (Random.Range(1, 50) == 2)
                 {
                     instanceObject(obj);
                 }

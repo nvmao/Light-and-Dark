@@ -34,10 +34,10 @@ TagManager:
   - ItemTrigger
   - KillItem
   - CollectItem
-  - 
-  - 
-  - 
-  - 
+  - DeathlyEnemy
+  - Wall
+  - Laser
+  - FlockEnemy
   - 
   - 
   - 
@@ -58,9 +58,15 @@ TagManager:
   - name: box
     uniqueID: 3165960941
     locked: 0
+  - name: coin
+    uniqueID: 2195608659
+    locked: 0
   - name: player
     uniqueID: 834224475
     locked: 0
-  - name: coin
-    uniqueID: 2195608659
+  - name: enemy
+    uniqueID: 102623677
+    locked: 0
+  - name: laser
+    uniqueID: 2376579799
     locked: 0

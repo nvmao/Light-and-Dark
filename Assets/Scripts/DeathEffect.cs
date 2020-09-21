@@ -12,7 +12,7 @@ public class DeathEffect : MonoBehaviour
 
     public void exploreCoin(Vector2 position)
     {
-        for (int i = 0; i < 30; i++)
+        for (int i = 0; i < 15; i++)
         {
             Instantiate(coin, position, Quaternion.identity);
         }

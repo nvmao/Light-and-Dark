@@ -2,31 +2,46 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlockEnemy : Triangle
+public class FlockEnemy : Triangle,mao.ICanDisable
 {
-    private FlockEnemy[] neightbours;
-
-    private float alignRadius= 3f;
+    [SerializeField]
+    private float alignRadius = 5f;
+    [SerializeField]
     private float coheRadius = 1f;
+    [SerializeField]
     private float sepaRadius = 2f;
 
-    private Box[] boxs;
+
+    [SerializeField] LayerMask layerMask;
+    [SerializeField] LayerMask selfMask;
+
+
+    float neightBourRadius = 5;
+
+    public float minX = -90;
+    public float maxX = 95;
+    public float minY = -24;
+    public float maxY = 28;
+
+    BlurOnAwaken blurOnAwaken;
+
+    private void Awake()
+    {
+        blurOnAwaken = new BlurOnAwaken(GetComponent<SpriteRenderer>());
+        StartCoroutine(blurOnAwaken.wait());
+    }
 
     // Start is called before the first frame updatef
     void Start()
     {
-        boxs = FindObjectsOfType<Box>();
-
         base.Start();
         //speed = Random.Range(3, 5);
 
-        neightbours = FindObjectsOfType<FlockEnemy>();
-
-        float x = Random.Range(-16, 16);
-        float y = Random.Range(-9, 9);
+        float x = Random.Range(minX, maxX);
+        float y = Random.Range(minY, maxY);
         body.velocity = new Vector2(x, y).normalized * speed;
 
-
+     
     }
 
     // Update is called once per frame
@@ -42,10 +57,8 @@ public class FlockEnemy : Triangle
 
         Vector2 steering = Vector2.zero;
 
-        steering = steering + this.alignment();
-        steering = steering + this.cohesion();
-        steering = steering + this.separation();
-        //steering = steering + avoidance(boxs);
+        steering += alignment() + separation() + cohesion();
+        steering += avoidance(layerMask);
 
         steering = Vector2.ClampMagnitude(steering, seekForce);
 
@@ -55,25 +68,94 @@ public class FlockEnemy : Triangle
         body.velocity = velocity;
     }
 
+
+
     private void edges()
     {
-        if(transform.position.x < -20)
+
+
+        if (transform.position.x < minX)
         {
-            transform.position = new Vector3(20, transform.position.y, transform.position.z);
+            transform.position = new Vector3(maxX, transform.position.y, transform.position.z);
         }
-        else if (transform.position.x > 20)
+        else if (transform.position.x > maxX)
         {
-            transform.position = new Vector3(-20, transform.position.y, transform.position.z);
+            transform.position = new Vector3(minX, transform.position.y, transform.position.z);
         }
 
-        if (transform.position.y < -11)
+        if (transform.position.y < minY)
         {
-            transform.position = new Vector3(transform.position.x, 11, transform.position.z);
+            transform.position = new Vector3(transform.position.x, maxY, transform.position.z);
         }
-        else if (transform.position.y > 11)
+        else if (transform.position.y > maxY)
         {
-            transform.position = new Vector3(transform.position.x, -11, transform.position.z);
+            transform.position = new Vector3(transform.position.x, minY, transform.position.z);
         }
+    }
+
+    private Vector2 flock_force()
+    {
+        Vector2 v = Vector2.zero;
+
+        int neighborCount = 0;
+
+        Vector2 v_align = new Vector2();
+
+        Vector2 v_cohe = new Vector2();
+        Vector2 centerOfMass_cohe = new Vector2();
+
+        Vector2 v_sepa = new Vector2();
+
+
+        Collider2D[] neightbours = Physics2D.OverlapCircleAll(transform.position, neightBourRadius, selfMask);
+
+
+        foreach (var triangle in neightbours)
+        {
+
+
+            float d = Vector2.Distance(transform.position, triangle.transform.position);
+            if (triangle != this)
+            {
+                //align
+                if (d <= alignRadius)
+                {
+                    v_align += triangle.GetComponent<Rigidbody2D>().velocity;
+                }
+
+                if (d <= coheRadius)
+                {
+                    //cohe
+                    centerOfMass_cohe += (Vector2)triangle.transform.position;
+                }
+
+                if (d <= sepaRadius)
+                {
+                    //sepa
+                    v_sepa += (Vector2)triangle.transform.position - (Vector2)transform.position;
+
+                }
+                neighborCount++;
+            }
+        }
+
+        if (neighborCount > 0)
+        {
+            //align
+            v_align = (v_align / neighborCount).normalized;
+
+            centerOfMass_cohe = centerOfMass_cohe / neighborCount;
+            v_cohe = (centerOfMass_cohe - (Vector2)transform.position).normalized;
+
+            v_sepa /= neighborCount;
+            v_sepa *= -1;
+            v_sepa = v_sepa.normalized;
+
+            v = v_align + v_cohe + v_sepa;
+        }
+
+        return v;
+
     }
 
     private Vector2 alignment()
@@ -81,18 +163,19 @@ public class FlockEnemy : Triangle
         Vector2 v = new Vector2();
         int neighborCount = 0;
 
-        foreach(var triangle in neightbours)
+        Collider2D[] neightbours = Physics2D.OverlapCircleAll(transform.position, neightBourRadius, selfMask);
+        foreach (var triangle in neightbours)
         {
             float d = Vector2.Distance(transform.position, triangle.transform.position);
-            if (triangle != this 
+            if (triangle != this
                && d < alignRadius)
             {
-                v += triangle.velocity;
+                v += triangle.GetComponent<Rigidbody2D>().velocity;
                 neighborCount++;
             }
         }
-        
-        if(neighborCount > 0)
+
+        if (neighborCount > 0)
         {
             v = v / neighborCount;
 
@@ -108,7 +191,7 @@ public class FlockEnemy : Triangle
         Vector2 centerOfMass = new Vector2();
 
         int neighborCount = 0;
-
+        Collider2D[] neightbours = Physics2D.OverlapCircleAll(transform.position, neightBourRadius, selfMask);
         foreach (var triangle in neightbours)
         {
             float d = Vector2.Distance(transform.position, triangle.transform.position);
@@ -132,9 +215,10 @@ public class FlockEnemy : Triangle
 
     private Vector2 separation()
     {
-        Vector2 v = new Vector2();
+        Vector2 v = Vector2.zero;
         int neighborCount = 0;
 
+        Collider2D[] neightbours = Physics2D.OverlapCircleAll(transform.position, neightBourRadius, selfMask);
         foreach (var triangle in neightbours)
         {
             float d = Vector2.Distance(transform.position, triangle.transform.position);
@@ -142,16 +226,37 @@ public class FlockEnemy : Triangle
             if (triangle != this
                 && d < sepaRadius)
             {
-                Vector2 diff = (Vector2)transform.position - (Vector2)triangle.transform.position;
-                float scale = diff.magnitude/(float)Mathf.Sqrt(sepaRadius);
+                //Vector2 diff = (Vector2)transform.position - (Vector2)triangle.transform.position;
+                //float scale = diff.magnitude / Mathf.Sqrt(sepaRadius);
 
-                v = diff.normalized / scale;
+                //v = diff.normalized / scale;
+
+
+                v += (Vector2)triangle.transform.position - (Vector2)transform.position;
+
 
                 neighborCount++;
             }
         }
 
+        if (neighborCount != 0)
+        {
+            v /= neighborCount;
+            v *= -1;
+            v = v.normalized * 5;
+        }
+
         return v;
     }
 
+    void mao.ICanDisable.disabled()
+    {
+        this.enabled = false;
+        //this.GetComponent<PolygonCollider2D>().enabled = false;
+    }
+    void mao.ICanDisable.enabled()
+    {
+        this.enabled = true;
+        //this.GetComponent<PolygonCollider2D>().enabled = true;
+    }
 }
