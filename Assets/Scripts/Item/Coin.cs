@@ -58,6 +58,6 @@ public class Coin : MonoBehaviour,mao.IOnTouch
         GameController.instance.GameStatus.Coin += value;
         Database.saveGameStatus(GameController.instance.GameStatus);
 
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }

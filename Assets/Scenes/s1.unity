@@ -6657,7 +6657,11 @@ MonoBehaviour:
   - tag: DeathlyEnemy
     prefab: {fileID: 6934769949695543877, guid: 53a8a61dc3533894598628a35b9e3eca,
       type: 3}
-    size: 10
+    size: 20
+  - tag: MovingCoin
+    prefab: {fileID: 3750146797985372788, guid: d4d786e51a1611445835027274bb8e08,
+      type: 3}
+    size: 100
 --- !u!4 &1076877651
 Transform:
   m_ObjectHideFlags: 0

@@ -109,9 +109,8 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.ICanDisable,mao.IOnStartPo
             Instantiate(deathEffect, transform.position, Quaternion.identity);
 
             AudioManager.instance.play("playerDeath");
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
-        
     }
 
     void mao.ICanDisable.disabled()

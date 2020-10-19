@@ -14,7 +14,7 @@ public class DeathEffect : MonoBehaviour
     {
         for (int i = 0; i < 15; i++)
         {
-            Instantiate(coin, position, Quaternion.identity);
+            ObjectPooler.Instance.spawn("MovingCoin", position, Quaternion.identity);
         }
     }
 

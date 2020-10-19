@@ -59,13 +59,17 @@ public class ObjectPooler : MonoBehaviour
         obj.transform.position = position;
         obj.transform.rotation = rotation;
 
-        obj.GetComponent<mao.IOnStartPool>().onStart();
+        mao.IOnStartPool haveOnstart = obj.GetComponent<mao.IOnStartPool>();
+        if(haveOnstart != null)
+        {
+            haveOnstart.onStart();
+        }
 
         poolDictionary[tag].Enqueue(obj);
 
         return obj;
     }
 
-   
+    
 
 }
