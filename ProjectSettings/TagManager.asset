@@ -15,6 +15,7 @@ TagManager:
   - SpeedUp
   - Kill
   - AutoCollect
+  - LineDoor
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - Wall
   - Laser
   - FlockEnemy
-  - 
+  - LineDoor
   - 
   - 
   - 

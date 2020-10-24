@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemySpawner : MonoBehaviour
 {
+    [SerializeField] bool hasSpawn = true;
 
     [SerializeField] GameObject money;
     [SerializeField] GameObject enemy;
@@ -11,6 +12,9 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] GameObject[] objects;
 
     [SerializeField] Player player;
+
+    [SerializeField] GameObject lineDoor;
+    GameObject currentLineDoor;
 
     GameObject currentMoney;
 
@@ -21,6 +25,9 @@ public class EnemySpawner : MonoBehaviour
 
     float spawnTime = 5f;
     float spawnTimeCount;
+    
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -38,15 +45,31 @@ public class EnemySpawner : MonoBehaviour
         //{
         //    spawn();
         //}
-        spawnTimeCount -= Time.deltaTime;
-        if(spawnTimeCount < 0)
+
+        if (hasSpawn)
         {
-            spawn();
-            spawnTimeCount = spawnTime;
+            spawnTimeCount -= Time.deltaTime;
+            if (spawnTimeCount < 0)
+            {
+                spawn();
+                spawnTimeCount = spawnTime;
+            }
         }
 
+        spawnLineDoor();
 
     }
+
+    public void spawnLineDoor()
+    {
+        if(currentLineDoor != null)
+        {
+            return;
+        }
+        Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
+        currentLineDoor = Instantiate(lineDoor, randPosition + (Vector2)player.transform.position, Quaternion.identity);
+    }
+
 
     public Vector2 getCurrentMoneyPos()
     {
