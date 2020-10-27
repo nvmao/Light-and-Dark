@@ -13,11 +13,13 @@ public class LineDoor : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        GameController.instance.TimeLimit -= Time.deltaTime;
+        Debug.Log(GameController.instance.TimeLimit);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
+        GameController.instance.TimeLimit = 30.0f;
     }
 }

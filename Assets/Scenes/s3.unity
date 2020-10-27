@@ -152,6 +152,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 6981383152999455519, guid: 075028a2c8a5fff43a705e90d6c94108,
         type: 3}
+    - target: {fileID: 8818651617820365190, guid: 8842c292da7b00f4784b509f47f14e21,
+        type: 3}
+      propertyPath: randomInCameraArea
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8818651617820365191, guid: 8842c292da7b00f4784b509f47f14e21,
         type: 3}
       propertyPath: m_LocalPosition.x

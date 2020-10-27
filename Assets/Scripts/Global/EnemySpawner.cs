@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] bool hasSpawn = true;
+    [SerializeField] bool randomInCameraArea = false;
 
     [SerializeField] GameObject money;
     [SerializeField] GameObject enemy;
@@ -14,7 +15,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] Player player;
 
     [SerializeField] GameObject lineDoor;
-    GameObject currentLineDoor;
+    GameObject currentLineDoor = null;
 
     GameObject currentMoney;
 
@@ -25,8 +26,6 @@ public class EnemySpawner : MonoBehaviour
 
     float spawnTime = 5f;
     float spawnTimeCount;
-    
-
 
 
     // Start is called before the first frame update
@@ -62,12 +61,37 @@ public class EnemySpawner : MonoBehaviour
 
     public void spawnLineDoor()
     {
-        if(currentLineDoor != null)
+        if(currentLineDoor != null && currentLineDoor.gameObject.activeSelf)
         {
             return;
         }
-        Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
-        currentLineDoor = Instantiate(lineDoor, randPosition + (Vector2)player.transform.position, Quaternion.identity);
+        if (randomInCameraArea)
+        {
+            Camera camera = Camera.main;
+            float halfHeight = camera.orthographicSize;
+            float halfWidth = camera.aspect * halfHeight;
+
+            
+
+            float minX = camera.transform.position.x - halfWidth;
+            float maxX = camera.transform.position.x + halfWidth;
+            float minY = camera.transform.position.y - halfHeight;
+            float maxY = camera.transform.position.y + halfHeight;
+
+            Debug.Log("width: " + minX);
+            Debug.Log("height: " + minY);
+            Debug.Log("width: " + maxX);
+            Debug.Log("height: " + maxY);
+
+            Vector2 randPosition = new Vector2(Random.Range(minX, maxX), Random.Range(minY, maxY));
+            currentLineDoor = ObjectPooler.Instance.spawn("LineDoor", randPosition, Quaternion.identity);
+        }
+        else
+        {
+            Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
+            currentLineDoor = ObjectPooler.Instance.spawn("LineDoor", randPosition + (Vector2)player.transform.position, Quaternion.identity);
+        }
+
     }
 
 

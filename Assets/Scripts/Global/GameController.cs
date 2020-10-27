@@ -5,6 +5,7 @@ using UnityEngine;
 public class GameController : MonoBehaviour
 {
     public bool isStart = false;
+    float timeLimit = 30.0f;
 
     public static GameController instance;
 
@@ -16,6 +17,7 @@ public class GameController : MonoBehaviour
     float timeCount;
 
     public GameStatus GameStatus { get => gameStatus; set => gameStatus = value; }
+    public float TimeLimit { get => timeLimit; set => timeLimit = value; }
 
     private void Awake()
     {
