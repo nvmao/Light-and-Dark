@@ -50,7 +50,12 @@ public class ObjectPooler : MonoBehaviour
     {
         if (!poolDictionary.ContainsKey(tag))
         {
-            Debug.LogWarning("no tag found in pool");
+            Debug.LogWarning("no tag found in pool: " + tag);
+            return null;
+        }
+
+        if(poolDictionary[tag].Count == 0)
+        {
             return null;
         }
 

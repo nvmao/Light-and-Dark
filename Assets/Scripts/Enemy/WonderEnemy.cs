@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WonderEnemy : Triangle,mao.IOnTouch,mao.ICanDisable
+public class WonderEnemy : Triangle,mao.IOnTouch
 {
 
     BlurOnAwaken blurOnAwaken;
@@ -10,7 +10,7 @@ public class WonderEnemy : Triangle,mao.IOnTouch,mao.ICanDisable
 
     private void Awake()
     {
-        blurOnAwaken = new BlurOnAwaken(GetComponent<SpriteRenderer>());
+        blurOnAwaken = new BlurOnAwaken(GetComponent<PolygonCollider2D>(),GetComponent<SpriteRenderer>());
         StartCoroutine(blurOnAwaken.wait());
     }
 
@@ -35,17 +35,6 @@ public class WonderEnemy : Triangle,mao.IOnTouch,mao.ICanDisable
     public void onTouch(Player player)
     {
         player.playDeathEffect();
-    }
-
-    void mao.ICanDisable.disabled()
-    {
-        this.enabled = false;
-        this.GetComponent<PolygonCollider2D>().enabled = false;
-    }
-    void mao.ICanDisable.enabled()
-    {
-        this.enabled = true;
-        this.GetComponent<PolygonCollider2D>().enabled = true;
     }
 
 }

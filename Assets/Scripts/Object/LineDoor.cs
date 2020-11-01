@@ -14,7 +14,6 @@ public class LineDoor : MonoBehaviour
     void Update()
     {
         GameController.instance.TimeLimit -= Time.deltaTime;
-        Debug.Log(GameController.instance.TimeLimit);
     }
 
     public void OnTriggerEnter2D(Collider2D collision)

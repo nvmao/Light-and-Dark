@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovingLight : Triangle
+public class MovingLight : Triangle,mao.IOnStartPool
 {
+    BlurOnAwaken blurOnAwaken;
 
     // Start is called before the first frame update
     void Start()
@@ -38,4 +39,11 @@ public class MovingLight : Triangle
         collider.enabled = true;
     }
 
+    public void onStart()
+    {
+        this.Start();
+
+        blurOnAwaken = new BlurOnAwaken(GetComponent<CircleCollider2D>(), GetComponent<SpriteRenderer>());
+        StartCoroutine(blurOnAwaken.wait());
+    }
 }

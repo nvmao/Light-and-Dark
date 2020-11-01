@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using mao;
 using UnityEngine;
 
-public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.ICanDisable,mao.IOnStartPool
+public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.IOnStartPool
 {
     private GameObject player;
     private float timeFollow = 5.0f;
@@ -24,7 +24,7 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.ICanDisable,mao.IOnStartPo
 
     public void onStart()
     {
-        blurOnAwaken = new BlurOnAwaken(GetComponent<SpriteRenderer>());
+        blurOnAwaken = new BlurOnAwaken(GetComponent<PolygonCollider2D>(),GetComponent<SpriteRenderer>());
         StartCoroutine(blurOnAwaken.wait());
     }
 
@@ -112,16 +112,6 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.ICanDisable,mao.IOnStartPo
             gameObject.SetActive(false);
         }
     }
-
-    void mao.ICanDisable.disabled()
-    {
-        this.enabled = false;
-        this.GetComponent<PolygonCollider2D>().enabled = false;
-    }
-    void mao.ICanDisable.enabled()
-    {
-        this.enabled = true;
-        this.GetComponent<PolygonCollider2D>().enabled = true;
-    }
+   
 
 }

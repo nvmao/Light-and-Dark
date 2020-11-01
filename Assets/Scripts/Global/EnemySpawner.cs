@@ -55,7 +55,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        spawnLineDoor();
+        //spawnLineDoor();
 
     }
 
@@ -77,6 +77,8 @@ public class EnemySpawner : MonoBehaviour
             float maxX = camera.transform.position.x + halfWidth;
             float minY = camera.transform.position.y - halfHeight;
             float maxY = camera.transform.position.y + halfHeight;
+
+            minY += halfHeight * 0.6f;
 
             Debug.Log("width: " + minX);
             Debug.Log("height: " + minY);

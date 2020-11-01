@@ -7,20 +7,25 @@ public class BlurOnAwaken
     SpriteRenderer spriteRenderer;
     Animator animator;
     Color beginColor;
+    Collider2D collider;
 
-    public BlurOnAwaken(SpriteRenderer sprite, Animator animator = null)
+
+    public BlurOnAwaken(Collider2D collider,SpriteRenderer sprite, Animator animator = null)
     {
         this.animator = animator;
         beginColor = sprite.color;
         this.spriteRenderer = sprite;
+        this.collider = collider;
 
         if (animator != null)
         {
             animator.enabled = false;
         }
         sprite.color = new Color(10, 10, 10, 10);
-
-        sprite.GetComponent<mao.ICanDisable>().disabled();
+        if(collider != null)
+        {
+            collider.enabled = false;
+        }
     }
 
     public IEnumerator wait()
@@ -32,6 +37,10 @@ public class BlurOnAwaken
             animator.enabled = false;
         }
         spriteRenderer.color = beginColor;
-        spriteRenderer.GetComponent<mao.ICanDisable>().enabled();
+        
+        if(collider != null)
+        {
+            collider.enabled = true;
+        }
     }
 }

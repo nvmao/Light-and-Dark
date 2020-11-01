@@ -162,7 +162,6 @@ public class Player : Triangle
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("col: " + collision.name);
         mao.IOnTouch touchObject = null;
 
         if(collision.transform.parent != null)
