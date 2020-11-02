@@ -74,7 +74,7 @@
     <Compile Include="Assets\Joystick Pack\Examples\JoystickSetterExample.cs" />
     <Compile Include="Assets\Scripts\Global\BlurOnAwaken.cs" />
     <Compile Include="Assets\Tayx\Graphy - Ultimate Stats Monitor\Scripts\GraphyManager.cs" />
-    <Compile Include="Assets\Scripts\mao\ICanDisable.cs" />
+    <Compile Include="Assets\Scripts\mao\IGetScript.cs" />
     <Compile Include="Assets\Tayx\Graphy - Ultimate Stats Monitor\Scripts\Fps\G_FpsManager.cs" />
     <Compile Include="Assets\Tayx\Graphy - Ultimate Stats Monitor\Scripts\Util\G_Intstring.cs" />
     <Compile Include="Assets\Tayx\Graphy - Ultimate Stats Monitor\Scene\Customization Scripts\CustomizeGraphy.cs" />
@@ -103,6 +103,7 @@
     <Compile Include="Assets\Tayx\Graphy - Ultimate Stats Monitor\Scripts\Audio\G_AudioGraph.cs" />
     <Compile Include="Assets\Scripts\Item\speedUp.cs" />
     <Compile Include="Assets\Scripts\Menu.cs" />
+    <Compile Include="Assets\Scripts\Enemy\SnakePart.cs" />
     <Compile Include="Assets\Scripts\Global\GameController.cs" />
     <Compile Include="Assets\Joystick Pack\Scripts\Joysticks\DynamicJoystick.cs" />
     <Compile Include="Assets\Scripts\Item\Coin.cs" />

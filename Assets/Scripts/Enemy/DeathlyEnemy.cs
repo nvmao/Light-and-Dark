@@ -11,25 +11,26 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.IOnStartPool
     private float timeChangePos = 0.5f;
 
     [SerializeField]
-    GameObject deathEffect;
+    protected GameObject deathEffect;
 
     [SerializeField] LayerMask layerMask;
 
-    BlurOnAwaken blurOnAwaken;
+    protected BlurOnAwaken blurOnAwaken;
 
     private void Awake()
     {
-        onStart();
+        //onStart();
     }
 
     public void onStart()
     {
-        blurOnAwaken = new BlurOnAwaken(GetComponent<PolygonCollider2D>(),GetComponent<SpriteRenderer>());
+        blurOnAwaken = new BlurOnAwaken(this,GetComponent<PolygonCollider2D>(),GetComponent<SpriteRenderer>(),null,true);
         StartCoroutine(blurOnAwaken.wait());
+        this.Start();
     }
 
     // Start is called before the first frame update
-    void Start()
+    protected void Start()
     {
         //speed = Random.Range(8, 18);
         seekForce = Random.Range(0.1f, 1.8f);
@@ -39,7 +40,7 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.IOnStartPool
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
         chasing();
         movement();
@@ -102,15 +103,20 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.IOnStartPool
         player.playDeathEffect();
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    protected virtual void touchSelf(Collider2D collision)
     {
-        if(collision.CompareTag("DeathlyEnemy"))
+        if (collision.CompareTag("DeathlyEnemy"))
         {
             Instantiate(deathEffect, transform.position, Quaternion.identity);
 
             AudioManager.instance.play("playerDeath");
             gameObject.SetActive(false);
         }
+    }
+
+    public virtual void OnTriggerEnter2D(Collider2D collision)
+    {
+        touchSelf(collision);
     }
    
 

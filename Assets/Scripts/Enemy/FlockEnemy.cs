@@ -27,7 +27,7 @@ public class FlockEnemy : Triangle
 
     private void Awake()
     {
-        blurOnAwaken = new BlurOnAwaken(null,GetComponent<SpriteRenderer>());
+        blurOnAwaken = new BlurOnAwaken(this,null,GetComponent<SpriteRenderer>());
         StartCoroutine(blurOnAwaken.wait());
     }
 

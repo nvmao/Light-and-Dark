@@ -43,7 +43,7 @@ public class MovingLight : Triangle,mao.IOnStartPool
     {
         this.Start();
 
-        blurOnAwaken = new BlurOnAwaken(GetComponent<CircleCollider2D>(), GetComponent<SpriteRenderer>());
+        blurOnAwaken = new BlurOnAwaken(this,GetComponent<CircleCollider2D>(), GetComponent<SpriteRenderer>());
         StartCoroutine(blurOnAwaken.wait());
     }
 }

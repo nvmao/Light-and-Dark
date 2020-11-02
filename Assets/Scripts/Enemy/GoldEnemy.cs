@@ -16,7 +16,7 @@ public class GoldEnemy : Triangle,mao.IOnTouch
 
     private void Awake()
     {
-        blurOnAwaken = new BlurOnAwaken(GetComponent<PolygonCollider2D>(),GetComponent<SpriteRenderer>());
+        blurOnAwaken = new BlurOnAwaken(this,GetComponent<PolygonCollider2D>(),GetComponent<SpriteRenderer>());
         StartCoroutine(blurOnAwaken.wait());
     }
 

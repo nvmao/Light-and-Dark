@@ -1,40 +1,44 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class SnakeEnemy : Triangle,mao.IOnTouch
+public class SnakeEnemy : DeathlyEnemy
 {
-
-    [SerializeField] Transform followTarget;
-
-    bool targetDeath = false;
+    [SerializeField] int maxParts = 10;
+    [SerializeField] SnakePart snakePartObject;
 
     // Use this for initialization
     void Start()
     {
         base.Start();
+
+        SnakePart prevPart = null;
+        for (int i = 0; i < maxParts; i++)
+        {
+            SnakePart snakePart = Instantiate(snakePartObject, transform.position, transform.rotation);
+            //snakePart.transform.parent = transform;
+            snakePart.Speed = this.speed;
+            if (i == 0)
+            {
+                snakePart.FollowTarget = transform;
+            }
+            else
+            {
+                snakePart.FollowTarget = prevPart.transform;
+            }
+            prevPart = snakePart;
+
+        }
+
     }
 
     // Update is called once per frame
     void Update()
     {
-
-        if(followTarget != null)
-        {
-            this.target = followTarget.position;
-            targetDeath = true;
-        }
-        else if(targetDeath)
-        {
-            //followTarget = FindObjectOfType<Player>().transform;
-            randomTarget();
-            targetDeath = false;
-        }
-        arrive(target, 2);
-
+        base.Update();
     }
 
-    public void onTouch(Player player)
+    public override void OnTriggerEnter2D(Collider2D collision)
     {
-        player.playDeathEffect();
     }
+
 }

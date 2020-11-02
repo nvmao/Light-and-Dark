@@ -16,6 +16,7 @@ TagManager:
   - Kill
   - AutoCollect
   - LineDoor
+  - SnakeEnemy
   layers:
   - Default
   - TransparentFX
@@ -40,7 +41,7 @@ TagManager:
   - Laser
   - FlockEnemy
   - LineDoor
-  - 
+  - SnakeEnemy
   - 
   - 
   - 
