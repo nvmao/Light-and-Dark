@@ -9726,6 +9726,16 @@ PrefabInstance:
       propertyPath: m_Follow
       value: 
       objectReference: {fileID: 1866393659}
+    - target: {fileID: 582165202304494625, guid: 15d1e5c6cc5d8a44982a00ada07cdcbf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 54.69
+      objectReference: {fileID: 0}
+    - target: {fileID: 582165202463167866, guid: 15d1e5c6cc5d8a44982a00ada07cdcbf,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 61.1109
+      objectReference: {fileID: 0}
     - target: {fileID: 582165202463167867, guid: 15d1e5c6cc5d8a44982a00ada07cdcbf,
         type: 3}
       propertyPath: m_Follow
@@ -10334,6 +10344,41 @@ PrefabInstance:
       propertyPath: gameStatusUI.bestSurvive
       value: 
       objectReference: {fileID: 874655777}
+    - target: {fileID: 7239023422916225528, guid: 9c529007ec7489a4ab02db31f0a31794,
+        type: 3}
+      propertyPath: soundsEdit.Array.data[0].volume
+      value: 0.722
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239023422916225528, guid: 9c529007ec7489a4ab02db31f0a31794,
+        type: 3}
+      propertyPath: soundsEdit.Array.data[1].volume
+      value: 0.689
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239023422916225528, guid: 9c529007ec7489a4ab02db31f0a31794,
+        type: 3}
+      propertyPath: soundsEdit.Array.data[2].volume
+      value: 0.713
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239023422916225528, guid: 9c529007ec7489a4ab02db31f0a31794,
+        type: 3}
+      propertyPath: soundsEdit.Array.data[4].volume
+      value: 0.697
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239023422916225528, guid: 9c529007ec7489a4ab02db31f0a31794,
+        type: 3}
+      propertyPath: soundsEdit.Array.data[6].volume
+      value: 0.656
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239023422916225528, guid: 9c529007ec7489a4ab02db31f0a31794,
+        type: 3}
+      propertyPath: soundsEdit.Array.data[7].volume
+      value: 0.664
+      objectReference: {fileID: 0}
+    - target: {fileID: 7239023422916225528, guid: 9c529007ec7489a4ab02db31f0a31794,
+        type: 3}
+      propertyPath: soundsEdit.Array.data[8].volume
+      value: 0.639
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9c529007ec7489a4ab02db31f0a31794, type: 3}
 --- !u!96 &8267686962370530323
@@ -10495,8 +10540,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f08b7a3de8044f24899b1d1c781575b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
-  seekForce: 0.5
+  speed: 11
+  seekForce: 0.05
   startPoint: {fileID: 0}
   deathEffect: {fileID: 1367761672}
   layerMask:

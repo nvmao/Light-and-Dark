@@ -10,7 +10,7 @@ public class SnakeEnemy : DeathlyEnemy
     void Start()
     {
         base.Start();
-
+        seekForce = 0.1f;
         SnakePart prevPart = null;
         for (int i = 0; i < maxParts; i++)
         {

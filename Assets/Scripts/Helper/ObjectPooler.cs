@@ -70,7 +70,7 @@ public class ObjectPooler : MonoBehaviour
             haveOnstart.onStart();
         }
 
-        poolDictionary[tag].Enqueue(obj);
+        //poolDictionary[tag].Enqueue(obj);
 
         return obj;
     }

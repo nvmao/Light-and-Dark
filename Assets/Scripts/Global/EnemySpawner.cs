@@ -33,8 +33,8 @@ public class EnemySpawner : MonoBehaviour
     {
         spawnTimeCount = spawnTime;
         Vector2 randPosition = new Vector2(Random.Range(minRandX, maxRandX), Random.Range(minRandY, maxRandY));
-        GameObject newMoney = Instantiate(money, randPosition, Quaternion.identity);
-        currentMoney = newMoney;
+        //GameObject newMoney = Instantiate(money, randPosition, Quaternion.identity);
+        //currentMoney = newMoney;
     }
 
     // Update is called once per frame
@@ -55,8 +55,7 @@ public class EnemySpawner : MonoBehaviour
             }
         }
 
-        //spawnLineDoor();
-
+        spawnExp();
     }
 
     public void spawnLineDoor()
@@ -96,6 +95,35 @@ public class EnemySpawner : MonoBehaviour
 
     }
 
+    public void spawnExp()
+    {
+        if (Random.Range(0, 10) == 1)
+        {
+            Camera camera = Camera.main;
+            float halfHeight = camera.orthographicSize;
+            float halfWidth = camera.aspect * halfHeight;
+            float minX = camera.transform.position.x - halfWidth;
+            float maxX = camera.transform.position.x + halfWidth;
+            float minY = camera.transform.position.y - halfHeight;
+            float maxY = camera.transform.position.y + halfHeight;
+
+            float x = Random.Range(minX - 10, minX);
+            if (Random.Range(0, 2) == 1)
+            {
+                x = Random.Range(maxX, maxX + 10);
+            }
+            float y = Random.Range(minY, maxY);
+            //if (Random.Range(0, 2) == 1)
+            //{
+            //    y = Random.Range(maxY, maxY + 10);
+            //}
+
+            Vector2 randPosition = new Vector2(x, y);
+            ObjectPooler.Instance.spawn("Exp", randPosition, Quaternion.identity);
+        }
+        
+    }
+
 
     public Vector2 getCurrentMoneyPos()
     {
@@ -117,8 +145,8 @@ public class EnemySpawner : MonoBehaviour
         ObjectPooler.Instance.spawn("DeathlyEnemy", randPosition * 3f + (Vector2)player.transform.position, Quaternion.identity);
         ObjectPooler.Instance.spawn("DeathlyEnemy", randPosition3 * 3f + (Vector2)player.transform.position, Quaternion.identity);
 
-        GameObject newMoney = Instantiate(money, randPosition2 * 3f + (Vector2)player.transform.position, Quaternion.identity);
-        currentMoney = newMoney;
+        //GameObject newMoney = Instantiate(money, randPosition2 * 3f + (Vector2)player.transform.position, Quaternion.identity);
+        //currentMoney = newMoney;
 
         spawnObjects();
     }
@@ -144,7 +172,7 @@ public class EnemySpawner : MonoBehaviour
             }
             else
             {
-                instanceObject(obj);
+                //instanceObject(obj);
             }
            
         }

@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.IOnStartPool
 {
-    private GameObject player;
+    [SerializeField]
+    protected GameObject player;
     private float timeFollow = 5.0f;
     private float timeWait = 0.8f;
     private float timeChangePos = 0.5f;
@@ -34,7 +35,6 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.IOnStartPool
     {
         //speed = Random.Range(8, 18);
         seekForce = Random.Range(0.1f, 1.8f);
-        player = FindObjectOfType<Player>().gameObject;
         randomTarget();
         base.Start();
     }
@@ -116,7 +116,7 @@ public class DeathlyEnemy : Triangle,mao.IOnTouch,mao.IOnStartPool
 
     public virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        touchSelf(collision);
+        //touchSelf(collision);
     }
    
 

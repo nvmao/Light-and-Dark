@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class GameController : MonoBehaviour
 {
+    public static float GRAVITY = 9.81f;
+
+
+    
     public bool isStart = false;
     float timeLimit = 30.0f;
 
